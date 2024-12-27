@@ -20,19 +20,17 @@ public class App {
             
             DataHandler dataHandler;
             String currentMode;
-
+            
             if (choice.equals("1")) {
                 dataHandler = new CSVDataHandler();
-                currentMode = "CSV";
+                System.out.println("Current mode: CSV");
             } else if (choice.equals("2")) {
                 dataHandler = new JSONDataHandler();
-                currentMode = "JSON";
+                System.out.println("Current mode: JSON");
             } else {
                 dataHandler = new CSVDataHandler();
-                currentMode = "CSV";
+                System.out.println("Current mode: CSV");
             }
-
-            System.out.println("Current mode: " + currentMode);
 
             RecipeUI ui = new RecipeUI(dataHandler);
             ui.displayMenu();
