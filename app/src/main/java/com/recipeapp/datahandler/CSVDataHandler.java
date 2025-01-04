@@ -6,13 +6,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.util.stream.Collectors;
 
 public class CSVDataHandler implements DataHandler {
-
     private String filePath;
-    
+
     public CSVDataHandler() {
-        this.filePath = "src/main/resources/recipes.csv";
+        this.filePath = "app/src/main/resources/recipes.csv";
     }
 
     public CSVDataHandler(String filePath) {
@@ -50,12 +51,15 @@ public class CSVDataHandler implements DataHandler {
 
     @Override
     public void writeData(Recipe recipe) throws IOException {
-        // 未実装
+        try (FileWriter writer = new FileWriter(filePath, true)) {
+            String line = recipe.getName() + "," + recipe.getIngredients().stream()
+            .map(ingredient -> ingredient.getName()).collect(Collectors.joining(","));
+            writer.write(line + "\n");
+        }
     }
 
     @Override
     public ArrayList<Recipe> searchData(String keyword) throws IOException {
-        // 未実装
         return null;
     }
 }
